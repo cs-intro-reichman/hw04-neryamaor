@@ -44,19 +44,13 @@ public class ArrCharOps {
      *  returns true; Otherwise returns false.
      */
     public static boolean equals(char[] arr1, char[] arr2) {
-        boolean equal = false;
-             if(arr1.length == arr2.length){
-                 for(int i = 0; i < arr1.length; i++){
-                     if (arr1[i] == arr2[i]){
-                     equal = true;
-                      }else{
-                      equal = false;
-                      break;
-                      }
-                 }  
-        }
-        return equal;
+    if (arr1.length != arr2.length) return false;
+    
+    for (int i = 0; i < arr1.length; i++) {
+        if (arr1[i] != arr2[i]) return false;
     }
+    return true;
+}
     
 
     /** Returns the index within the given array of the first occurrence of the given character.
@@ -174,49 +168,17 @@ public class ArrCharOps {
      *         return -2 if there is an error with the input.
      */
     public static int compareTo(String str1, String str2) {
-        if (str1 == null || str2 == null){
-            return -2;
-        }
-        char[] arr1 = new char[str1.length()];
-        for(int i = 0;i < str1.length();i++){
-            arr1[i] = str1.charAt(i);
-        }
-        char[] arr2 = new char[str2.length()];
-        for(int i = 0;i < str2.length();i++){
-            arr2[i] = str2.charAt(i);
-        }//הפכתי את הסטרינגים למערכים
+    if (str1 == null || str2 == null) return -2;
 
+    int n = Math.min(str1.length(), str2.length());
 
-        int comparation = 0;//הברירת מחדל שהם שווים
-        double arr1rate = 0;
-        double arr2rate = 0;
-       
-
-         if(arr1.length > arr2.length){
-            arr1rate += 0.5;
-         }
-         if(arr1.length < arr2.length){
-            arr2rate += 0.5;
-          }
-
-          //  עכשיו יש יתרון למערך היותר גדול, כך שברגע שנצא מהלולאה יש לו יתרון קטן שישפיע רק שהם שווים לגמרי
-
-          
-    
-            for(int i = 0; i < str1.length() && i < str2.length();i++ ){
-               if(arr1[i] > arr2[i]){ 
-                arr1rate++;
-                } else if(arr1[i] < arr2[i]){
-                arr2rate++;
-                }
-             }
-
-            if(arr1rate > arr2rate){
-            comparation = -1;
-            }
-            else if(arr1rate<arr2rate){
-                comparation = 1;
-            }
-        return comparation;
+    for (int i = 0; i < n; i++) {
+        if (str1.charAt(i) < str2.charAt(i)) return -1;
+        if (str1.charAt(i) > str2.charAt(i)) return 1;
     }
+    if (str1.length() < str2.length()) return -1;
+    if (str1.length() > str2.length()) return 1;
+
+    return 0;
+}
 }
